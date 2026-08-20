@@ -110,7 +110,7 @@ func profileColumn(name string, ci int, rows [][]string) ColumnProfile {
 
 	nonNull := len(values)
 	if cp.TotalRows > 0 {
-		cp.NullRate = float64(cp.NullCount) / float64(cp.TotalRows)
+		cp.NullRate = applyNullRate(float64(cp.NullCount) / float64(cp.TotalRows))
 	}
 	cp.Distinct = len(freq)
 
