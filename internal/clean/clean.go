@@ -34,5 +34,6 @@ func Clean(t *parse.Table, rules []quality.Rule, rep quality.Report, opts Option
 		}
 		out.Rows = append(out.Rows, nrow)
 	}
+	out.Rows = fillCleaned(out.Rows)
 	return out
 }
