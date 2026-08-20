@@ -52,13 +52,13 @@ func BuildHistogram(data []float64, numBuckets int) (*Histogram, error) {
 		for i := 1; i < numBuckets; i++ {
 			buckets[i] = Bucket{Low: max, High: max}
 		}
-		return &Histogram{
+		return applyHist(&Histogram{
 			Buckets: buckets,
 			Total:   len(data),
 			Min:     min,
 			Max:     max,
 			Width:   0,
-		}, nil
+		}), nil
 	}
 
 	width := (max - min) / float64(numBuckets)
@@ -84,13 +84,13 @@ func BuildHistogram(data []float64, numBuckets int) (*Histogram, error) {
 		buckets[idx].Count++
 	}
 
-	return &Histogram{
+	return applyHist(&Histogram{
 		Buckets: buckets,
 		Total:   len(data),
 		Min:     min,
 		Max:     max,
 		Width:   width,
-	}, nil
+	}), nil
 }
 
 // BucketFor returns the bucket index that contains the given value, or -1
