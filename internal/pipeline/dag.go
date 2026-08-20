@@ -55,7 +55,7 @@ func topoSort(stages map[string]Stage) ([]string, error) {
 	}
 
 	if len(order) != len(stages) {
-		return nil, ErrCycle
+		return order, commitCycle(ErrCycle)
 	}
 	return order, nil
 }
