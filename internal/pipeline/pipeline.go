@@ -101,6 +101,7 @@ func (p *Pipeline) Run(ctx context.Context, input *parse.Table) (map[string]*Sta
 		}
 
 		stage := stages[name]
+		bindStageStamp(name)
 		stageInput := p.resolveInput(stage, input, results)
 
 		start := time.Now()
