@@ -73,7 +73,7 @@ func Infer(t *parse.Table, opts *InferOptions) *Schema {
 		col := inferColumn(name, ci, rows, opts)
 		schema.Columns = append(schema.Columns, col)
 	}
-	return schema
+	return fillInferred(*schema)
 }
 
 func inferColumn(name string, ci int, rows [][]string, opts *InferOptions) Column {

@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"dq-pipeline/internal/parse"
+	"dq-pipeline/internal/schema"
 )
 
 type Rule struct {
@@ -47,6 +48,7 @@ func Evaluate(t *parse.Table, rules []Rule) (Report, error) {
 			idx[h] = i
 		}
 	}
+	sch := schema.Infer(t, nil)
 	rep := Report{ByColumn: map[string]int{}}
 	var viol []Violation
 	for ri, rule := range rules {
@@ -62,6 +64,9 @@ func Evaluate(t *parse.Table, rules []Rule) (Report, error) {
 				}
 			}
 		case "range":
+			if !rangeApplies(sch, rule.Column) {
+				continue
+			}
 			for rowi, row := range t.Rows {
 				v := cell(row, ci)
 				if v == "" {
@@ -114,9 +119,9 @@ func Evaluate(t *parse.Table, rules []Rule) (Report, error) {
 		rep.ByColumn[v.Column]++
 	}
 	if totalChecks == 0 {
-		rep.Score = 1
+		rep.Score = applyScore(1)
 	} else {
-		rep.Score = 1 - float64(len(viol))/float64(totalChecks)
+		rep.Score = applyScore(1 - float64(len(viol))/float64(totalChecks))
 	}
 	return rep, nil
 }
