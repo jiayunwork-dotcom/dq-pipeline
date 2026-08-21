@@ -114,9 +114,9 @@ func Evaluate(t *parse.Table, rules []Rule) (Report, error) {
 		rep.ByColumn[v.Column]++
 	}
 	if totalChecks == 0 {
-		rep.Score = applyScore(1)
+		rep.Score = 1
 	} else {
-		rep.Score = applyScore(1 - float64(len(viol))/float64(totalChecks))
+		rep.Score = 1 - float64(len(viol))/float64(totalChecks)
 	}
 	return rep, nil
 }
