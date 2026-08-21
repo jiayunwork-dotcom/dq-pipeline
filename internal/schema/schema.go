@@ -212,7 +212,7 @@ func Validate(t *parse.Table, schema *Schema) []SchemaViolation {
 			}
 		}
 	}
-	return commitViols(viols)
+	return viols
 }
 
 func checkType(val string, col Column) string {
