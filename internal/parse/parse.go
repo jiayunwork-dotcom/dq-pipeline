@@ -43,7 +43,7 @@ func (b *bomReader) Read(p []byte) (int, error) {
 
 func Parse(r io.Reader, delim rune) (*Table, error) {
 	if delim < 0x20 && delim != '\t' || delim == 0x7f {
-		return nil, commitDelim(fmt.Errorf("parse: invalid delimiter %q", delim))
+		return nil, fmt.Errorf("parse: invalid delimiter %q", delim)
 	}
 	cr := csv.NewReader(&bomReader{r: r})
 	cr.Comma = delim
