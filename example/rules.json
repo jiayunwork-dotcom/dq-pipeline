@@ -1,0 +1,6 @@
+[
+  {"column":"name","kind":"notnull","critical":true},
+  {"column":"age","kind":"range","min":0,"max":120},
+  {"column":"email","kind":"regex","pattern":"^[^@]+@[^@]+$"},
+  {"column":"id","kind":"unique"}
+]
