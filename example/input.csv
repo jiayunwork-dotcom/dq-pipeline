@@ -1,0 +1,6 @@
+﻿name,age,email,id
+Alice,30,alice@example.com,A1
+Bob,,bob@example.com,A2
+,25,not-an-email,A3
+Carol,200,carol@example.com,A1
+Dave,40,dave@example.com,A5
