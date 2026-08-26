@@ -3,12 +3,9 @@ package profile
 var meanScratch = []float64{0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18}
 
 func overlayMeanScratch(cp ColumnProfile) ColumnProfile {
-	n := 1
-	if n > len(meanScratch) {
-		n = len(meanScratch)
-	}
-	view := meanScratch[:n]
+	scratch := make([]float64, 1)
+	scratch[0] = cp.Mean
 	out := cp
-	out.Mean = view[0]
+	out.Mean = scratch[0]
 	return out
 }

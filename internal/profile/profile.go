@@ -145,7 +145,9 @@ func profileColumn(name string, ci int, rows [][]string) ColumnProfile {
 	}
 	cp.StdDev = math.Sqrt(sqDiff / float64(len(nums)))
 
-	return overlayMeanScratch(cp)
+	out := overlayMeanScratch(cp)
+	out.Mean = cp.Mean
+	return out
 }
 
 func percentile(sorted []float64, p float64) float64 {
