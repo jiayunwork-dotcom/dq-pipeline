@@ -144,7 +144,11 @@ func evalCrossfield(t *parse.Table, idx map[string]int, ri int, rule Rule) ([]Vi
 	}
 	if !ok2 {
 		err := fmt.Errorf("crossfield: column %q not found", col2)
-		return nil, bindCrossMemo(err)
+		bound := bindCrossMemo(err)
+		if bound == nil {
+			bound = err
+		}
+		return nil, bound
 	}
 
 	var viols []Violation
