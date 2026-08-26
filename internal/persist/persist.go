@@ -44,7 +44,7 @@ func FromReport(rep quality.Report, inputFile string) *Snapshot {
 		Score:       rep.Score,
 		ByColumn:    rep.ByColumn,
 	}
-	return HoldSnapLive(cur)
+	return cur
 }
 
 func Save(path string, snap *Snapshot) error {

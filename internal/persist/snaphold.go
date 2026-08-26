@@ -11,7 +11,16 @@ var liveSnap = &Snapshot{
 }
 
 func HoldSnapLive(cur *Snapshot) *Snapshot {
-	out := liveSnap
-	liveSnap = cur
-	return out
+	if cur == nil {
+		return cur
+	}
+	copied := *cur
+	if cur.ByColumn != nil {
+		copied.ByColumn = make(map[string]int, len(cur.ByColumn))
+		for k, v := range cur.ByColumn {
+			copied.ByColumn[k] = v
+		}
+	}
+	liveSnap = &copied
+	return &copied
 }
