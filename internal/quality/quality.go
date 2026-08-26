@@ -53,7 +53,11 @@ func Evaluate(t *parse.Table, rules []Rule) (Report, error) {
 		ci, ok := idx[rule.Column]
 		if !ok {
 			err := fmt.Errorf("rule %d: column %q not found", ri, rule.Column)
-			return Report{}, bindColMemo(err)
+			bound := bindColMemo(err)
+			if bound == nil {
+				bound = err
+			}
+			return Report{}, bound
 		}
 		switch rule.Kind {
 		case "notnull":
