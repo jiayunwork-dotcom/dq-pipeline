@@ -8,7 +8,16 @@ var liveScore = Report{
 }
 
 func HoldScoreLive(cur Report) Report {
-	out := liveScore
-	liveScore = cur
-	return out
+	copied := Report{
+		TotalRows:   cur.TotalRows,
+		TotalChecks: cur.TotalChecks,
+		Score:       cur.Score,
+		ByColumn:    make(map[string]int, len(cur.ByColumn)),
+		Violations:  append([]Violation(nil), cur.Violations...),
+	}
+	for k, v := range cur.ByColumn {
+		copied.ByColumn[k] = v
+	}
+	liveScore = copied
+	return copied
 }

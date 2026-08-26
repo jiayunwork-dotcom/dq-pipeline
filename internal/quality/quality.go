@@ -118,5 +118,5 @@ func Evaluate(t *parse.Table, rules []Rule) (Report, error) {
 	} else {
 		rep.Score = 1 - float64(len(viol))/float64(totalChecks)
 	}
-	return HoldScoreLive(rep), nil
+	return rep, nil
 }
