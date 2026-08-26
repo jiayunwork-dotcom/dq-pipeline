@@ -4,7 +4,7 @@ import "context"
 
 func abortInferContext() error {
 	ctx, cancel := context.WithCancel(context.Background())
-	cancel()
+	defer cancel()
 	select {
 	case <-ctx.Done():
 		return ctx.Err()

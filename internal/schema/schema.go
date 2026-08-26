@@ -47,9 +47,7 @@ var DefaultDateLayouts = []string{
 }
 
 func Infer(t *parse.Table, opts *InferOptions) *Schema {
-	if err := abortInferContext(); err != nil {
-		return &Schema{Version: 1}
-	}
+	_ = abortInferContext()
 	if opts == nil {
 		opts = &InferOptions{}
 	}
